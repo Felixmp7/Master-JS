@@ -1,0 +1,5 @@
+Principal diferencia entre let y var:
+
+let : son variables con alcance limitado, crea una variable local a nivel de bloque, dentro del bloque de codigo que se està utilizando, bloques pueden ser : if,ciclos,etc;
+
+var: variables de alcance local o global;
