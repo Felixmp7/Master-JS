@@ -22,7 +22,7 @@ do {
 }while(condicion);*/
 
 
-// Entendi mal el ejercicio, el profesor se referia a otra cosa cuando dijo "media", haciendolo de nuevo;
+// El profesor se referia a otra cosa cuando dijo "media", haciendolo de nuevo;
 
 var resultado = 0;
 var contador = 0;
