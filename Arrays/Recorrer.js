@@ -1,10 +1,16 @@
 'use strict'
 
-var texto = ["Felix", "Jose", "Maria", "Andrha", "Alejandro", "Cesar", "Jesus"];
+var amigos = ["Felix", "Jose", "Maria", "Andrha", "Alejandro", "Cesar", "Jesus"];
 
 document.write("<h1>Amigos</h1>");
 document.write("<ul>")
-texto.forEach((elemento, indice) => {
+/*amigos.forEach((elemento, indice) => {
 	document.write("<li>"+indice+" - "+elemento+"</li>");
-})
+})*/
+
+//for in
+
+for(let amigo in amigos){
+	document.write("<li>"+amigos[amigo]+"</li>");
+}
 document.write("</ul>")

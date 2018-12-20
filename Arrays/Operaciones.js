@@ -23,4 +23,10 @@ console.log(peliculas);
 
 var string = peliculas.join(); // convierte arrays en strings
 
-console.log(string)
+//console.log(string)
+
+peliculas.sort();	//Ordernar array alfabeticamente
+console.log(peliculas);
+
+peliculas.reverse(); //Ordenar array al inverso
+console.log(peliculas);
