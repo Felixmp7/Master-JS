@@ -21,5 +21,43 @@ do{
 // 2)
 console.log(array);
 document.write('[ '+array+ ']');
+document.write('<br />')
 
 
+// 3)
+
+for (var i = 0; i <= array.length; i++) {
+	for (var j = i+1; j <= array.length; j++) {
+		if(array[i] > array[j]){
+			let auxiliar = array[i];
+			array[i] = array[j];
+			array[j] = auxiliar;
+		}
+	}
+}
+
+document.write('[ '+array+ ']');
+
+
+// 4)
+array.reverse();
+document.write('<br />')
+document.write('[ '+array+ ']');
+
+// 5)
+
+document.write('El array tiene '+(n-1)+ ' elementos');
+
+// 6)
+
+var busqueda = parseInt(prompt('Introduzca el numero que desea buscar? '));
+
+for (i = 0; i<= array.length; i++) {
+	if (busqueda == array[i]) {
+		console.log('Se ha encontrado el numero '+ busqueda + ' en la posicion '+i)
+		let encontrado = 1;
+	}
+	else{
+		console.log('No se encontró el elemento'+busqueda +' en el array');
+	}
+}
