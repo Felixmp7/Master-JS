@@ -55,9 +55,9 @@ var busqueda = parseInt(prompt('Introduzca el numero que desea buscar? '));
 for (i = 0; i<= array.length; i++) {
 	if (busqueda == array[i]) {
 		console.log('Se ha encontrado el numero '+ busqueda + ' en la posicion '+i)
-		let encontrado = 1;
+		var encontrado = 1;
 	}
-	else{
+	else if(i== array.length && !encontrado){
 		console.log('No se encontró el elemento'+busqueda +' en el array');
 	}
 }
