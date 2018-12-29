@@ -35,9 +35,16 @@ input.addEventListener('blur', ()=>{
 })
 
 //Keydown
-
-
-//Keyup
-
+input.addEventListener('keydown', e =>{
+	console.log('Pulsando la tecla ', String.fromCharCode(e.keyCode));
+})
 
 //Keypress
+input.addEventListener('keypress', e =>{
+	console.log('Tecla pulsada ', String.fromCharCode(e.keyCode));
+})
+
+//Keyup
+input.addEventListener('keyup', e =>{
+	console.log('Tecla soltada ', String.fromCharCode(e.keyCode));
+})
