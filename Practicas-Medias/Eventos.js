@@ -18,7 +18,26 @@ boton.addEventListener('mouseover', function(){
 });
 
 // Mouse out
-
 boton.addEventListener('mouseout', function(){
 	boton.style.backgroundColor = 'black';
 });
+
+
+//Focus
+var input = document.querySelector("#campo_nombre");
+input.addEventListener('focus', ()=>{
+	console.log('[Focus] estas dentro del input');
+})
+
+// Blur
+input.addEventListener('blur', ()=>{
+	console.log('[Blur] estas fuera del input');
+})
+
+//Keydown
+
+
+//Keyup
+
+
+//Keypress
