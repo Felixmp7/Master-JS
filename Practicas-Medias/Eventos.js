@@ -2,18 +2,23 @@
 
 
 function cambiarColor(){
-
-	var bg = boton.style.backgroundColor;
-	if (bg == "white") {
-		boton.style.backgroundColor = 'red';
-	}
-	else if(bg == 'red'){
-		boton.style.backgroundColor = 'white';
-	}
+	boton.style.backgroundColor = 'red';
 }
 
 var boton = document.querySelector("#boton");
-boton.style.backgroundColor = 'white';
+
+// Click
 boton.addEventListener('click', function(){
 	cambiarColor();
+});
+
+// Mouse over
+boton.addEventListener('mouseover', function(){
+	boton.style.backgroundColor = 'yellow';
+});
+
+// Mouse out
+
+boton.addEventListener('mouseout', function(){
+	boton.style.backgroundColor = 'black';
 });
