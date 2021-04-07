@@ -2,5 +2,7 @@
     <li *ngFor="let zapatilla of zapatillas">
         {{zapatilla.nombre}}
         <strong> - {{zapatilla.precio}}</strong>
+        <!-- Directivas: Son funcionalidades que podemos agregar en nuestro html (*ngIf, *ngFor) -->
+        <b *ngIf="zapatilla.precio <= 80"> OFERTA</b>
     </li>
 </ul>
