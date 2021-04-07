@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { config } from './models/configuration';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public title:string = 'AngularApp';
+  public isShowCurses:boolean = true;
+  public config;
+
+  constructor(){
+    this.config = config;
+  }
+
+  toggleShowCurses():void{
+    this.isShowCurses = !this.isShowCurses;
+  }
 }
