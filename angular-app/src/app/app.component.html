@@ -11,9 +11,6 @@
   }
 </style>
 <div [ngStyle]="{'background': config.bg}">
-  <span>{{ title }}</span>
-  <videogame></videogame>
-  <button (click)="toggleShowCurses()">Toggle</button>
-  <cursos *ngIf="isShowCurses"></cursos>
+  <zapatilla></zapatilla>
 </div>
 <router-outlet></router-outlet>
