@@ -2,6 +2,9 @@
     .altoPrecio {
         color: chartreuse;
     }
+    .fondoAzul {
+        background: rgb(58, 99, 235);
+    }
 </style>
 <p>Mi marca</p>
 <input type="text" [(ngModel)]="miZapatilla">
@@ -11,7 +14,15 @@
 <ul>
     <li *ngFor="let zapatilla of zapatillas">
         {{zapatilla.nombre}}
-        <strong [class.altoPrecio]="zapatilla.precio >= 80"> - {{zapatilla.precio}}</strong>
+        <strong
+            [class.altoPrecio]="zapatilla.precio >= 80"
+            [ngClass]="{
+                altoPrecio: zapatilla.precio > 100,
+                fondoAzul: zapatilla.marca === 'Nike'
+            }"
+        >
+        - {{zapatilla.precio}}
+    </strong>
         <!-- Directivas: Son funcionalidades que podemos agregar en nuestro html (*ngIf, *ngFor) -->
         <b *ngIf="zapatilla.precio <= 80"> OFERTA</b>
     </li>
