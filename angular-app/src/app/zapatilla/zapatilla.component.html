@@ -1,3 +1,8 @@
+<p>Mi marca</p>
+<input type="text" [(ngModel)]="miZapatilla">
+
+<button (click)="showMarca()">Ver Zapatilla</button>
+
 <ul>
     <li *ngFor="let zapatilla of zapatillas">
         {{zapatilla.nombre}}

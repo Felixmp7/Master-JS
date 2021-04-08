@@ -7,6 +7,7 @@ import { Zapatilla } from '../models/zapatilla';
 })
 export class ZapatillaComponent implements OnInit {
   public zapatillas:Array<Zapatilla>;
+  public miZapatilla:string = '';
 
   constructor() {
     this.zapatillas = [
@@ -19,6 +20,10 @@ export class ZapatillaComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.zapatillas);
+  }
+
+  showMarca(){
+    alert(this.miZapatilla)
   }
 
 }
