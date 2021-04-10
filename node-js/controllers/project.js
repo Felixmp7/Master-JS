@@ -109,6 +109,33 @@ const controller = {
             });
         });
     },
+    deleteProject: (req, res) => {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(200).send({
+                status: 'success',
+                message: "No existe ID."
+            });
+        }
+        Project.findByIdAndDelete(id, (error, projectDeleted) => {
+            if (error) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: "Ocurrió un error en el servidor."
+                });
+            } else if (!projectDeleted) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: "No existen proyectos"
+                });
+            }
+            return res.status(200).send({
+                status: 'success',
+                data: {...projectDeleted}
+            });
+        });
+    },
 };
 
 module.exports = controller;
