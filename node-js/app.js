@@ -16,6 +16,12 @@ app.use((json()));
 
 // rutas
 
+app.get('/', (request, response) => {
+    response.status(200).send({
+        message: 'Hola Mundo desde mi API en Express'
+    })
+})
+
 // exportar
 
 module.exports = app;
