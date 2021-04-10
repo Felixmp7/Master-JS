@@ -1,3 +1,4 @@
+// Un modelo representa a un documento de una colección de la DB.
 'use strict'
 
 const mongoose = require('mongoose');
