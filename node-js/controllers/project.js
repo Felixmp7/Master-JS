@@ -35,7 +35,7 @@ const controller = {
             });
         });
     },
-    getProject: (req,res) => {
+    getProject: (req, res) => {
         const { id } = req.params;
 
         if (!id) {
@@ -61,7 +61,26 @@ const controller = {
                 data: { ...projectFinded._doc }
             });
         });
-    }
+    },
+    getAllProjects: (req, res) => {
+        Project.find({}).exec((error, projects) => {
+            if (error) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: "Ocurrió un error en el servidor."
+                });
+            } else if (!projects) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: "No existen proyectos"
+                });
+            }
+            return res.status(200).send({
+                status: 'success',
+                data: [...projects]
+            });
+        });
+    },
 };
 
 module.exports = controller;
