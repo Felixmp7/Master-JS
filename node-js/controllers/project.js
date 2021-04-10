@@ -81,6 +81,34 @@ const controller = {
             });
         });
     },
+    updateProject: (req, res) => {
+        const { id } = req.params;
+        const dataUpdated = req.body;
+
+        if (!id) {
+            return res.status(200).send({
+                status: 'success',
+                message: "No existe ID."
+            });
+        }
+        Project.findByIdAndUpdate(id, dataUpdated, { new: true }, (error, projectUpdated) => {
+            if (error) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: "Ocurrió un error en el servidor."
+                });
+            } else if (!projectUpdated) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: "No existen proyectos"
+                });
+            }
+            return res.status(200).send({
+                status: 'success',
+                data: {...projectUpdated._doc}
+            });
+        });
+    },
 };
 
 module.exports = controller;
