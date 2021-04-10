@@ -10,5 +10,6 @@ router.post('/test', controller.test);
 router.post('/add-project', controller.addProject);
 router.post('/project/:id?', controller.getProject);
 router.get('/projects', controller.getAllProjects);
+router.put('/project/:id', controller.updateProject);
 
 module.exports = router;
