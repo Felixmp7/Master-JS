@@ -1,21 +1,13 @@
 // Será un objeto JSON o una clase que podra tener una serie de atributos y metodos con los que podra interactuar con la entidad de Proyectos.
 'use strict'
 
-const ProjectModel = require('../models/project');
+const Project = require('../models/project');
 
 const controller = {
-    home: (req, res) => {
-        return res.status(200).send({
-            status: 'success'
-        });
-    },
-    test: (req, res) => {
-        return res.status(200).send({
-            status: 'success'
-        });
-    },
+    home: (req, res) => res.status(200).send({ status: 'success' }),
+    test: (req, res) => res.status(200).send({ status: 'success' }),
     addProject: (req, res) => {
-        const newProject = new ProjectModel();
+        const newProject = new Project();
         const { name, description, year, category, langs } = req.body;
 
         newProject.name = name;
@@ -36,12 +28,38 @@ const controller = {
                     status: 'error',
                     message: "Ocurrió un error al almacenar el nuevo proyecto."
                 });
-            } else {
-                return res.status(200).send({
-                    status: 'success',
-                    data: { ...projectSaved._doc}
+            }
+            return res.status(200).send({
+                status: 'success',
+                data: { ...projectSaved._doc}
+            });
+        });
+    },
+    getProject: (req,res) => {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(200).send({
+                status: 'success',
+                message: "No existe ID."
+            });
+        }
+        Project.findById(id, (error, projectFinded) => {
+            if (error) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: "Ocurrió un error en el servidor."
+                });
+            } else if (!projectFinded) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: "No se encontró el proyecto."
                 });
             }
+            return res.status(200).send({
+                status: 'success',
+                data: { ...projectFinded._doc }
+            });
         });
     }
 };
