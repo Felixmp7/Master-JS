@@ -12,11 +12,11 @@ const projectRoutes = require('./routes/project');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use('/api', projectRoutes);
 
 // CORS
 
 // rutas
+app.use('/api', projectRoutes);
 
 // exportar
 
