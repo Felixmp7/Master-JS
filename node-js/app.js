@@ -1,7 +1,6 @@
 'use strict'
 
 const express = require('express');
-const { urlencoded, json } = require('body-parser');
 
 const app = express();
 
