@@ -17,6 +17,12 @@ app.use((json()));
 // rutas
 
 app.get('/', (request, response) => {
+    response.status(200).send(
+        "<h1>Root Page</h1>"
+    )
+})
+
+app.get('/test', (request, response) => {
     response.status(200).send({
         message: 'Hola Mundo desde mi API en Express'
     })
