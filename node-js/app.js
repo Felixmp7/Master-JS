@@ -5,52 +5,18 @@ const { urlencoded, json } = require('body-parser');
 
 const app = express();
 
-// documentos de rutas
+// archivos de rutas
+const projectRoutes = require('./routes/project');
 
 // middlewares
 
-app.use(urlencoded({ extended: false }));
-app.use((json()));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use('/api', projectRoutes);
 
 // CORS
 
 // rutas
-
-app.get('/', (request, response) => {
-    response.status(200).send(
-        `<h1>Root page</h1>`
-    )
-});
-
-app.get('/:id', (request, response) => {
-    const id = request.params.id;
-    const query = request.query;
-    response.status(200).send(
-        `
-            <h1>
-                Hola usuario numero: ${id}
-            </h1>
-            ${query.phone ? (
-                `<b>${query.phone}</b>`
-            ) : null}
-        `
-    )
-});
-
-app.post('/', (request, response) => {
-    const { name, lastName } = request.body;
-
-    response.status(200).send(
-        `<h1>Hola ${name} ${lastName}</h1>`
-    )
-});
-
-
-app.get('/test', (request, response) => {
-    response.status(200).send({
-        message: 'Hola Mundo desde mi API en Express'
-    })
-});
 
 // exportar
 
