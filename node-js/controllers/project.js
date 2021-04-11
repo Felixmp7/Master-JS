@@ -39,7 +39,7 @@ const controller = {
         const { id } = req.params;
 
         if (!id) {
-            return res.status(200).send({
+            return res.status(204).send({
                 status: 'success',
                 message: "No existe ID."
             });
@@ -86,7 +86,7 @@ const controller = {
         const dataUpdated = req.body;
 
         if (!id) {
-            return res.status(200).send({
+            return res.status(204).send({
                 status: 'success',
                 message: "No existe ID."
             });
@@ -113,7 +113,7 @@ const controller = {
         const { id } = req.params;
 
         if (!id) {
-            return res.status(200).send({
+            return res.status(204).send({
                 status: 'success',
                 message: "No existe ID."
             });
@@ -135,6 +135,27 @@ const controller = {
                 data: {...projectDeleted}
             });
         });
+    },
+    uploadImage: (req, res) => {
+        const { id } = req.params;
+        let fileName = 'Image not uploaded';
+
+        if (!id) {
+            return res.status(200).send({
+                status: 'success',
+                message: `param "id" is required for this request`
+            });
+        } else if (req.files) {
+            return res.status(200).send({
+                status: 'success',
+                data: req.files
+            });
+        } else {
+            return res.status(204).send({
+                status: 'success',
+                data: fileName
+            });
+        }
     },
 };
 
