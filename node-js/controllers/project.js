@@ -1,6 +1,6 @@
 // Será un objeto JSON o una clase que podra tener una serie de atributos y metodos con los que podra interactuar con la entidad de Proyectos.
 'use strict'
-
+const fs = require('fs');
 const Project = require('../models/project');
 
 const controller = {
@@ -147,27 +147,44 @@ const controller = {
             });
         } else if (req.files) {
             const filePath = req.files.files.path;
-            const fileSplit = filePath.split('/');
-            fileName = fileSplit[1];
+            const fileSplited = filePath.split('/');
+            fileName = fileSplited[1];
+            const extensionSplited = fileName.split('\.');
+            const extension = extensionSplited[1];
 
-            Project.findByIdAndUpdate(id, { image: fileName }, { new: true },
-                (error, projectUpdated) => {
-                    if (error) {
-                        return res.status(500).send({
-                            status: 'error',
-                            message: "Ocurrió un error en el servidor."
+            if (
+                extension === 'png' ||
+                extension === 'jpg' ||
+                extension === 'jpeg' ||
+                extension === 'gif'
+            ) {
+                Project.findByIdAndUpdate(id, { image: fileName }, { new: true },
+                    (error, projectUpdated) => {
+                        if (error) {
+                            return res.status(500).send({
+                                status: 'error',
+                                message: "Ocurrió un error en el servidor."
+                            });
+                        } else if (!projectUpdated) {
+                            return res.status(404).send({
+                                status: 'error',
+                                message: "No existen proyectos"
+                            });
+                        }
+                        return res.status(200).send({
+                            status: 'success',
+                            data: { ...projectUpdated._doc }
                         });
-                    } else if (!projectUpdated) {
-                        return res.status(404).send({
-                            status: 'error',
-                            message: "No existen proyectos"
-                        });
-                    }
-                    return res.status(200).send({
-                        status: 'success',
-                        data: { ...projectUpdated._doc }
                     });
-                });
+            } else {
+                fs.unlink(filePath, () => {
+                    return res.status(400).send({
+                        status: 'error',
+                        message: "Asset type is not suported, only accept images in format png, jpg, jpeg or gifs"
+                    });
+                })
+            }
+
         } else {
             return res.status(204).send({
                 status: 'success',
