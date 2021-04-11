@@ -39,9 +39,9 @@ const controller = {
         const { id } = req.params;
 
         if (!id) {
-            return res.status(204).send({
-                status: 'success',
-                message: "No existe ID."
+            return res.status(400).send({
+                status: 'error',
+                message: `param "id" is required for this request`
             });
         }
         Project.findById(id, (error, projectFinded) => {
@@ -86,9 +86,9 @@ const controller = {
         const dataUpdated = req.body;
 
         if (!id) {
-            return res.status(204).send({
-                status: 'success',
-                message: "No existe ID."
+            return res.status(400).send({
+                status: 'error',
+                message: `param "id" is required for this request`
             });
         }
         Project.findByIdAndUpdate(id, dataUpdated, { new: true }, (error, projectUpdated) => {
@@ -113,9 +113,9 @@ const controller = {
         const { id } = req.params;
 
         if (!id) {
-            return res.status(204).send({
-                status: 'success',
-                message: "No existe ID."
+            return res.status(400).send({
+                status: 'error',
+                message: `param "id" is required for this request`
             });
         }
         Project.findByIdAndDelete(id, (error, projectDeleted) => {
@@ -141,15 +141,33 @@ const controller = {
         let fileName = 'Image not uploaded';
 
         if (!id) {
-            return res.status(200).send({
-                status: 'success',
+            return res.status(400).send({
+                status: 'error',
                 message: `param "id" is required for this request`
             });
         } else if (req.files) {
-            return res.status(200).send({
-                status: 'success',
-                data: req.files
-            });
+            const filePath = req.files.files.path;
+            const fileSplit = filePath.split('/');
+            fileName = fileSplit[1];
+
+            Project.findByIdAndUpdate(id, { image: fileName }, { new: true },
+                (error, projectUpdated) => {
+                    if (error) {
+                        return res.status(500).send({
+                            status: 'error',
+                            message: "Ocurrió un error en el servidor."
+                        });
+                    } else if (!projectUpdated) {
+                        return res.status(404).send({
+                            status: 'error',
+                            message: "No existen proyectos"
+                        });
+                    }
+                    return res.status(200).send({
+                        status: 'success',
+                        data: { ...projectUpdated._doc }
+                    });
+                });
         } else {
             return res.status(204).send({
                 status: 'success',
